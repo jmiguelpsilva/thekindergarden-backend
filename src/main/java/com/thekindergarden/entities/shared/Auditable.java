@@ -2,9 +2,15 @@ package com.thekindergarden.entities.shared;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.*;
 
 import java.sql.Timestamp;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Embeddable
 public class Auditable {
 

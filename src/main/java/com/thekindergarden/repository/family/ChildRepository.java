@@ -1,4 +1,4 @@
-package com.thekindergarden.repository;
+package com.thekindergarden.repository.family;
 
 import com.thekindergarden.entities.family.Child;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;

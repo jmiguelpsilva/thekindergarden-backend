@@ -2,7 +2,13 @@ package com.thekindergarden.entities.shared;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.*;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Embeddable
 public class Address {
 
