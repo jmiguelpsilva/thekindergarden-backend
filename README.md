@@ -1,4 +1,5 @@
-# thekindergarden-backend
+# The KinderGarden
+## thekindergarden-backend
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
@@ -61,6 +62,7 @@ If you want to learn more about building native executables, please consult <htt
 - Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
 - Liquibase ([guide](https://quarkus.io/guides/liquibase)): Handle your database schema migrations with Liquibase
 - JDBC Driver - PostgreSQL ([guide](https://quarkus.io/guides/datasource)): Connect to the PostgreSQL database via JDBC
+- Lombok - Reduce boilerplate code. It automatically generates getters, setters, builders, and constructors during compilation.
 
 ## Provided Code
 
@@ -71,6 +73,8 @@ Create your first JPA entity
 [Related guide section...](https://quarkus.io/guides/hibernate-orm)
 
 [Related Hibernate with Panache section...](https://quarkus.io/guides/hibernate-orm-panache)
+
+
 
 
 ### REST

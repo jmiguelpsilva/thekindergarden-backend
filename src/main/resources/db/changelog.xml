@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.33.xsd">
+
+    <changeSet id="001-create-children-table" author="jmiguelpsilva">
+        <createTable schemaName="family" tableName="children">
+            <column name="id" type="binary(16)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_children"/>
+            </column>
+            <column name="father_id" type="binary(16)"/>
+            <column name="mother_id" type="binary(16)"/>
+            <column name="name" type="VARCHAR(100)"/>
+            <column name="nickname" type="VARCHAR(50)"/>
+            <column name="vat_number" type="VARCHAR(9)"/>
+            <column name="special_needs" type="BOOLEAN"/>
+            <column name="special_needs_observations" type="VARCHAR(255)"/>
+            <column name="street" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="postal_code" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country" type="VARCHAR(255)"/>
+            <column name="created_by" type="VARCHAR(255)"/>
+            <column name="created_at" type="DATETIME"/>
+            <column name="updated_by" type="VARCHAR(255)"/>
+            <column name="updated_at" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="002-create-emergency-contact-table" author="jmiguelpsilva">
+        <createTable schemaName="family" tableName="emergency_contacts">
+            <column name="id" type="binary(16)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_emergency_contacts"/>
+            </column>
+            <column name="child_id" type="binary(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="phoneNumber" type="VARCHAR(255)"/>
+            <column name="observations" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="003-create-parents-table" author="jmiguelpsilva">
+        <createTable schemaName="family" tableName="parents">
+            <column name="id" type="binary(16)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_parents"/>
+            </column>
+            <column name="fullName" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="004-add-unique-constrain-to-vat-number" author="jmiguelpsilva">
+        <addUniqueConstraint columnNames="vat_number" constraintName="uc_children_vat_number" schemaName="family"
+                             tableName="children"/>
+    </changeSet>
+    <changeSet id="005-foreign-key" author="jmiguelpsilva">
+        <addForeignKeyConstraint baseColumnNames="father_id" baseTableName="children" baseTableSchemaName="family"
+                                 constraintName="FK_FATHER" referencedColumnNames="id" referencedTableName="parents"
+                                 referencedTableSchemaName="family"/>
+    </changeSet>
+    <changeSet id="006-foreign-key" author="jmiguelpsilva">
+        <addForeignKeyConstraint baseColumnNames="mother_id" baseTableName="children" baseTableSchemaName="family"
+                                 constraintName="FK_MOTHER" referencedColumnNames="id" referencedTableName="parents"
+                                 referencedTableSchemaName="family"/>
+    </changeSet>
+    <changeSet id="007-foreign-key" author="jmiguelpsilva">
+        <addForeignKeyConstraint baseColumnNames="child_id" baseTableName="emergency_contacts"
+                                 baseTableSchemaName="family" constraintName="FK_SOS_CONTACT_CHILD"
+                                 referencedColumnNames="id" referencedTableName="children"
+                                 referencedTableSchemaName="family"/>
+    </changeSet>
+</databaseChangeLog>
