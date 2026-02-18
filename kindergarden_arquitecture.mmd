@@ -1,0 +1,61 @@
+graph TD
+    %% Social Providers
+    subgraph "Provedores Externos (SSO)"
+        S1[Google Auth]
+        S2[Apple ID]
+    end
+
+    %% Auth Layer
+    subgraph "Camada de Identidade (IdP)"
+        G[Serviço de Autenticação<br/>Keycloak / Auth0]
+        G1[Base de Dados Local<br/>Email/Password]
+    end
+
+    %% Media Layer
+    subgraph "Cloud Storage"
+        H[Object Storage<br/>AWS S3 / GCS]
+    end
+
+    %% Client Layer
+    subgraph "Camada de Cliente"
+        A[Angular Web App]
+        B[Mobile App]
+    end
+
+    %% API Layer
+    subgraph "Camada de Aplicativo"
+        C[Quarkus Backend API]
+        D[Cronjobs de Sincronização]
+    end
+
+    %% Data Layer
+    subgraph "Camada de Dados"
+        E[(PostgreSQL)]
+        F[(MongoDB)]
+    end
+
+    %% Interactions
+    A & B -- 1. Login --> G
+    G -- 2. JWT Token --> A & B
+    A & B -- 3. Request + JWT --> C
+
+    C -- 4. Validação --> G
+    C -- 5. Metadados & Tags --> E
+    C -- 6. Transações/Ementas --> F
+
+    %% Media Flow
+    C -- 7. Solicitar Upload/Download --> H
+    H -- 8. URL Assinada --> C
+    C -- 9. Entrega URL Temporária --> A & B
+    A & B -- 10. Acesso Direto ao Ficheiro --> H
+
+    %% Sync Flow
+    D -- Sync Faturas/Ementas --> E & F
+
+    %% Styles
+    style G fill:#f9f,stroke:#333
+    style H fill:#ff9900,stroke:#333
+    style E fill:#336791,stroke:#fff,color:#fff
+    style F fill:#47A248,stroke:#fff,color:#fff
+    style C fill:#FF0000,stroke:#fff,color:#fff
+    style A fill:#DD0031,stroke:#fff,color:#fff

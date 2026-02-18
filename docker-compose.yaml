@@ -1,0 +1,13 @@
+services:
+  database:
+    container_name: kindergarden-db
+    image: postgres:18.1
+    restart: always
+    environment:
+      POSTGRES_USER: kinder_dev
+      POSTGRES_PASSWORD: kinder_dev
+      POSTGRES_DB: kindergarden
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./kindergarden:/var/lib/postgresql/data
