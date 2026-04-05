@@ -1,6 +1,6 @@
 package com.thekindergarden.dto.family;
 
-import com.thekindergarden.dto.shared.AddressDTO;
+import com.thekindergarden.entities.shared.Address;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +12,7 @@ public class ChildDTO {
     private String fullName;
     private String nickName;
     private String vatNumber;
-    private AddressDTO address;
+    private Address address;
     private ParentDTO father;
     private ParentDTO mother;
 
